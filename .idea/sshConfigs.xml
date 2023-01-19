@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="dev.secretcode.kr" id="76d52614-1e10-4bbb-a1b7-6f3f037a692a" port="22" nameFormat="DESCRIPTIVE" username="secretcode" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    span[aria-current='page']{
+        @apply bg-gray-200
+    }
+}
+
+tr:hover td {
+    background: #f3efef;
+}
+
+input {
+    padding : 4rem;
+}
+
+input:read-only{
+    border: none;
+    pointer-events: none;
+}
+input:read-only:focus {
+    border : none;
+}
+
+.write > a {
+    padding-left : 0.5rem;
+}
+
+.bbs > tr > td:nth-child(3){
+    text-align : left!important;
+}
+
+.user > tr > td:nth-child(2){
+    text-align : left!important;
+}

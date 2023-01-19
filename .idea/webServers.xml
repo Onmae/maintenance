@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="28251668-dcd6-452e-b38f-6128065c52d8" name="SSH">
+        <fileTransfer accessType="SFTP" host="dev.secretcode.kr" port="22" sshConfigId="76d52614-1e10-4bbb-a1b7-6f3f037a692a" sshConfig="secretcode@dev.secretcode.kr:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

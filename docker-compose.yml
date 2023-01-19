@@ -1,0 +1,64 @@
+# Define services
+services:
+  # App backend service
+  app-server:
+    container_name: maintenance_server
+    # Configuration for building the docker image for the backend service
+    build:
+      context: ./server # Use an image built from the specified dockerfile in the `polling-app-server` directory.
+      dockerfile: Dockerfile
+    ports:
+      - "10100:8080" # Forward the exposed port 8080 on the container to port 8080 on the host machine
+    restart: always
+    depends_on:
+      - db # This service depends on mysql. Start that first.
+    environment: # Pass environment variables to the service
+      SPRING_DATASOURCE_URL: jdbc:mysql://maintenance_db:3306/maintenance
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: admin
+      UPLOAD_PATH: /home/secretcode/maintenance/file/
+    networks: # Networks to join (Services on the same network can communicate with each other using their name)
+      - backend
+      - frontend
+
+  # Frontend Service 
+  app-client:
+    container_name: maintenance_client
+    build:
+      context: ./client # Use an image built from the specified dockerfile in the `polling-app-client` directory.
+      dockerfile: Dockerfile
+    ports:
+      - "9090:80" # Map the exposed port 80 on the container to port 9090 on the host machine
+    restart: always
+    volumes:
+      - /app/node_modules
+      # 컨테이너밖: 컨테이너안
+      - ./client:/app
+    depends_on:
+      - app-server
+    networks:
+      - frontend
+
+  # Database Service (Mysql)
+  db:
+    container_name: maintenance_db
+    image: mysql:8.0.31
+    ports:
+      - "13306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: maintenance
+      MYSQL_ROOT_PASSWORD: admin
+    volumes:
+      - db-data:/var/lib/mysql
+    networks:
+      - backend
+
+# Volumes
+volumes:
+  db-data:
+
+# Networks to be created to facilitate communication between containers
+networks:
+  backend:
+  frontend:
