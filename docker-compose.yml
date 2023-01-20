@@ -31,7 +31,6 @@ services:
       - "9090:80" # Map the exposed port 80 on the container to port 9090 on the host machine
     restart: always
     volumes:
-      - /app/node_modules
       # 컨테이너밖: 컨테이너안
       - ./client:/app
     depends_on:
