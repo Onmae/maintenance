@@ -13,14 +13,16 @@ public class LoginCheckResponseDto {
     private Role role;
     private String name;
     private String facility;
+    private String token;
     private Boolean idExists;
 
     @Builder
-    public LoginCheckResponseDto(String id, Role role, String name, String facility, Boolean idExists) {
+    public LoginCheckResponseDto(String id, Role role, String name, String token, String facility, Boolean idExists) {
         this.id = id;
         this.role = role;
         this.name = name;
         this.facility = facility;
+        this.token = token;
         this.idExists = idExists;
     }
 }

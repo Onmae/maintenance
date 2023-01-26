@@ -13,6 +13,7 @@ services:
     depends_on:
       - db # This service depends on mysql. Start that first.
     environment: # Pass environment variables to the service
+      TZ: Asia/Seoul
       SPRING_DATASOURCE_URL: jdbc:mysql://maintenance_db:3306/maintenance
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: admin
@@ -27,12 +28,13 @@ services:
     build:
       context: ./client # Use an image built from the specified dockerfile in the `polling-app-client` directory.
       dockerfile: Dockerfile
+      args:
+        REACT_APP_API_BASE_URL: http://help.secretcode.kr:10100
     ports:
       - "9090:80" # Map the exposed port 80 on the container to port 9090 on the host machine
     restart: always
-    volumes:
-      # 컨테이너밖: 컨테이너안
-      - ./client:/app
+    environment:
+      - TZ=Asia/Seoul
     depends_on:
       - app-server
     networks:
@@ -47,6 +49,8 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: maintenance
+      MYSQL_USER: secretcode
+      MYSQL_PASSWORD: !secretcod1
       MYSQL_ROOT_PASSWORD: admin
     volumes:
       - db-data:/var/lib/mysql
