@@ -5,7 +5,7 @@
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://localhost:13306/maintenance</jdbc-url>
+      <jdbc-url>jdbc:mysql://localhost:3306/maintenance</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
     <data-source source="LOCAL" name="maintenance@help.secretcode.kr" uuid="a971f91d-5f14-4cae-bcd7-bd49038f2cd4">
@@ -13,14 +13,6 @@
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
       <jdbc-url>jdbc:mysql://help.secretcode.kr:13306/maintenance</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="6dd852e9-e8d0-4925-824c-03e3e036dc45">
-      <driver-ref>oracle.19</driver-ref>
-      <synchronize>true</synchronize>
-      <auto-commit>false</auto-commit>
-      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
-      <jdbc-url>jdbc:oracle:thin:@localhost:1521:orcl</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>

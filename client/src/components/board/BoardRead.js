@@ -155,6 +155,10 @@ export const BoardRead = () => {
                         }
                     </BigColumn>
 
+                    <BigColumn>
+                        <ColumnFiles title="첨부파일" content={board.files}/>
+                    </BigColumn>
+
 
                 </div>
             </div>

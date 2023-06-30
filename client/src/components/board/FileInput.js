@@ -1,15 +1,13 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useRef, useState} from "react";
 import {
     FileUploadContainer,
     FormField,
-    DragDropText,
-    UploadFileBtn,
     FilePreviewContainer,
     ImagePreview,
     PreviewContainer,
     PreviewList,
     FileMetaData,
-    InputLabel
+    InputLabel, UploadFileBtn
 } from "./file-upload.styles";
 import {
     ArrowUpOnSquareStackIcon,
