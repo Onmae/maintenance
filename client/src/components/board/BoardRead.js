@@ -8,6 +8,7 @@ import Cookies from "js-cookie"
 import SelectBox from "../SelectBox";
 import {categoryList} from "../../global_variables";
 import {BoardDeleteConfirmModal} from "./modal/BoardDeleteConfirmModal";
+import FileUpload from "./FileInput";
 
 export const BoardRead = () => {
     const navigate = useNavigate()
@@ -16,6 +17,8 @@ export const BoardRead = () => {
     const date = new Date()
     const inputRef = useRef()
     const formData = new FormData();
+
+    let files
 
     const [modalOpen, setModalOpen] = useState(false);
     const [board, setBoard] = useState({
@@ -33,6 +36,7 @@ export const BoardRead = () => {
         chargedName: "",
         comment: "",
         multipartFile: [],
+        isComment: "Y",
     })
     const [info, setInfo] = useState({})
 
@@ -74,14 +78,20 @@ export const BoardRead = () => {
             board.processedTime = ""
         }
 
+        board.isComment = 'Y'
         formData.append("data", new Blob([JSON.stringify(board)], {type: "application/json"}))
+        if (files) {
+            for (let file of files) {
+                formData.append("file", file)
+            }
+        }
         axios.post(`/api/board/${id}`, formData, {
             header: {
                 contentType: false,
                 processData: false,
             }
         })
-            .then(res => navigate(`/read/${id}`))
+            .then(res => window.location.reload())
             .catch(err => console.log(err))
             .finally(() => {
                 formData.delete('data')
@@ -93,6 +103,22 @@ export const BoardRead = () => {
             ...board,
             [e.target.name]: e.target.value,
         });
+    }
+
+    const fileInputEventHandler = (e) => {
+        files = e
+    }
+
+    const fileDeleteEventHandler = (value, index) => {
+        axios.delete(`/api/boardFileDelete/${value.file.id}`)
+            .then(r => {
+                alert("파일 삭제가 성공되었습니다")
+                setBoard({
+                    ...board,
+                    files : board.files.filter(x => x.file.id !== value.file.id)
+                })
+            })
+            .catch(err => alert("파일 삭제가 실패하였습니다."))
     }
 
     return (
@@ -136,7 +162,7 @@ export const BoardRead = () => {
                         </BigColumn>
 
                         <BigColumn>
-                            <ColumnFiles title="첨부파일" content={board.files}/>
+                            <ColumnFiles title="첨부파일" content={(board.files || []).filter(x => x.isComment !== 'Y')}/>
                         </BigColumn>
                     </div>
 
@@ -156,7 +182,20 @@ export const BoardRead = () => {
                     </BigColumn>
 
                     <BigColumn>
-                        <ColumnFiles title="첨부파일" content={board.files}/>
+                        {Cookies.get("role") === "USER" ? <ColumnFiles title="첨부파일" content={(board.files || []).filter(x => x.isComment === 'Y')}/>
+                            : <ColumnMax title="첨부파일">
+                                <FileUpload
+                                    accept=""
+                                    label=""
+                                    multiple
+                                    updateFilesCb={fileInputEventHandler}
+                                    file={(board.files || []).filter(x => x.isComment === 'Y')}
+                                    name="file"
+                                    fileDeleteEventHandler={fileDeleteEventHandler}
+                                />
+                            </ColumnMax>
+                        }
+
                     </BigColumn>
 
 

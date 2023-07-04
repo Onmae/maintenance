@@ -81,7 +81,7 @@ public class FileService {
                                 .boardId(id)
                                 .build();
 
-                        BoardFile boardFile = boardFileDto.toEntity(file);
+                        BoardFile boardFile = boardFileDto.toEntity(file, requestDto.getIsComment());
                         insertBoardFile(boardFile);
                     }
                 }

@@ -21,10 +21,11 @@ public class BoardFileDto {
         this.boardId = boardId;
     }
 
-    public BoardFile toEntity(File file) {
+    public BoardFile toEntity(File file, String isComment) {
         return BoardFile.builder()
                 .boardId(boardId)
                 .file(file)
+                .isComment(isComment)
                 .build();
     }
 }

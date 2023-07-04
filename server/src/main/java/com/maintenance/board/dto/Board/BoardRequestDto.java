@@ -28,10 +28,11 @@ public class    BoardRequestDto {
     private String chargedName;
     private String comment;
     private List<MultipartFile> multipartFile ;
+    private String isComment;
 
 
     @Builder
-    public BoardRequestDto(String facility, String name, String siteName, String siteAddress, String processing, String processedTime, String title, String content, String chargedName, String comment, List<MultipartFile> multipartFile) {
+    public BoardRequestDto(String facility, String name, String siteName, String siteAddress, String processing, String processedTime, String title, String content, String chargedName, String comment, List<MultipartFile> multipartFile, String isComment) {
         this.facility = facility;
         this.name = name;
         this.siteName = siteName;
@@ -43,6 +44,7 @@ public class    BoardRequestDto {
         this.chargedName = chargedName;
         this.comment = comment;
         this.multipartFile = multipartFile;
+        this.isComment = isComment;
     }
 
 

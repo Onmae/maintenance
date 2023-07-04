@@ -23,7 +23,7 @@ public class BoardFile {
 
     private Long boardId;
     private String delYn;
-    private Boolean isComment;
+    private String isComment;
 
     @OneToOne
     @JsonManagedReference
@@ -31,7 +31,7 @@ public class BoardFile {
     private File file;
 
     @Builder
-    public BoardFile(Long boardId, Long fileId, String delYn,Boolean isComment, File file){
+    public BoardFile(Long boardId, Long fileId, String delYn,String isComment, File file){
         this.boardId = boardId;
         this.delYn = "N";
         this.file = file;

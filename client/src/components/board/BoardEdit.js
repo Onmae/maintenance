@@ -27,6 +27,7 @@ export const BoardEdit = () => {
         chargedName: "",
         comment: "",
         multipartFile: [],
+        isComment: "N"
     })
     let files
 
@@ -82,6 +83,7 @@ export const BoardEdit = () => {
         if (!requireHandler()) return
         setLoadingOpen(true)
 
+        board.isComment = 'N'
         formData.append("data", new Blob([JSON.stringify(board)], {type: "application/json"}))
 
         if (files) {

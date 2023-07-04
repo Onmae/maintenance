@@ -18,6 +18,7 @@ export const BoardWrite = () => {
         title: "",
         content: "",
         multipartFile: [],
+        isComment: "N"
     })
 
     let files
@@ -62,6 +63,7 @@ export const BoardWrite = () => {
         if (!requireHandler()) return
         setLoadingOpen(true)
 
+        board.isComment = 'N'
         formData.append("data", new Blob([JSON.stringify(board)], {type: "application/json"}))
 
         if (files) {

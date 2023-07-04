@@ -33,6 +33,7 @@ public class BoardResponseDto {
 
     private String chargedName;
     private String comment;
+    private String isComment;
 
     private List<BoardFile> files ;
 
